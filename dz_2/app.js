@@ -6,6 +6,8 @@ const {PORT} = require('./config/variables')
 
 const app = express()
 
+app.get('/login',)
+
 app.listen(PORT,()=>{
     console.log("APP LISTEN",PORT);
 })
