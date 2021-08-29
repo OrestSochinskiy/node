@@ -1,4 +1,5 @@
 const ErrorHandler = require('../errors/ErrorHandler');
+const userValidator = require('../validators/user.validator');
 const User = require('../dataBase/User');
 
 module.exports = {
@@ -28,6 +29,19 @@ module.exports = {
       if (userByEmail) {
         throw new ErrorHandler(409, `Email ${email} is already exist`);
       }
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+  validateUserBody: (req, res, next) => {
+    try {
+      const { error } = userValidator.createUserValidator.validate(req.body);
+
+      if (error) {
+        throw new ErrorHandler(400, error.details[0].message);
+      }
+
       next();
     } catch (e) {
       next(e);
