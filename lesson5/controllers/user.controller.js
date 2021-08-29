@@ -1,20 +1,12 @@
 const User = require('../dataBase/User');
+const passwordService = require('../service/password.service');
+const { userNormalizator } = require('../utils/user.util');
 
 module.exports = {
   getSingleUser: (req, res, next) => {
     try {
-      const { user, testParam } = req;
-
-      // eslint-disable-next-line no-console
-      console.log(user);
-      // eslint-disable-next-line no-console
-      console.log('-------------------------------------------------');
-      // eslint-disable-next-line no-console
-      console.log(testParam);
-      // eslint-disable-next-line no-console
-      console.log('-------------------------------------------------');
-
-      res.json(user);
+      const userToReturn = userNormalizator(req.user);
+      res.json(userToReturn);
     } catch (e) {
       next(e);
     }
@@ -24,9 +16,15 @@ module.exports = {
   },
   createUser: async (req, res, next) => {
     try {
-      const createdUser = await User.create(req.body);
+      const { password } = req.body;
 
-      res.json(createdUser);
+      const hashedPassword = await passwordService.hashPassword(password);
+
+      const createdUser = await User.create({ ...req.body, password: hashedPassword });
+
+      const userToReturn = userNormalizator(createdUser);
+
+      res.json(userToReturn);
     } catch (e) {
       next(e);
     }

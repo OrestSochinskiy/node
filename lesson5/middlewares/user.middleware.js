@@ -6,7 +6,8 @@ module.exports = {
   isUserPresent: async (req, res, next) => {
     try {
       const { user_id } = req.params;
-      const user = await User.findById(user_id);
+      const user = await User.findById(user_id).lean();
+      // const user = await User.findById(user_id).select('id email');
 
       if (!user) {
         throw new ErrorHandler(418, 'user not found');
