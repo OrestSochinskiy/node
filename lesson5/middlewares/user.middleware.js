@@ -12,7 +12,6 @@ module.exports = {
       if (!user) {
         throw new ErrorHandler(418, 'user not found');
       }
-
       req.user = user;
       req.testParam = 'HELLO CHAT';
 
