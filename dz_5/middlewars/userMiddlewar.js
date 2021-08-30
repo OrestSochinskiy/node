@@ -1,3 +1,4 @@
+const userValidator = require('../validators/userValidators');
 const User = require('../dataBase/User');
 const message = require('../config/message');
 const ErrorHandler = require('../errors/ErrorHandler');
@@ -39,6 +40,30 @@ module.exports = {
 
       if (!name || !email) {
         throw new ErrorHandler(400, message.EMPTY_FIELDS);
+      }
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+  validateCreateUserBody: (req, res, next) => {
+    try {
+      const { error } = userValidator.createValidator.validate(req.body);
+
+      if (error) {
+        throw new ErrorHandler(400, error.details[0].message);
+      }
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+  validateUpdateUserBody: (req, res, next) => {
+    try {
+      const { error } = userValidator.updateValidator.validate(req.body);
+
+      if (error) {
+        throw new ErrorHandler(400, error.details[0].message);
       }
       next();
     } catch (e) {

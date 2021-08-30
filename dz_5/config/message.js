@@ -3,5 +3,6 @@ module.exports = {
   EMPTY_FIELDS: 'Fields are empty',
   ALREADY_EXIST: 'Already exist',
   UPDATED: 'Updated',
-  DELETED: 'Deleted'
+  DELETED: 'Deleted',
+  WRONG_DATA: 'Email or password is wrong',
 };
