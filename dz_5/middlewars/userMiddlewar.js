@@ -36,20 +36,6 @@ module.exports = {
       next(e);
     }
   },
-
-  isUserValid: (req, res, next) => {
-    try {
-      const { name, email } = req.body;
-
-      if (!name || !email) {
-        throw new ErrorHandler(NOT_VALID_DATA, message.EMPTY_FIELDS);
-      }
-      next();
-    } catch (e) {
-      next(e);
-    }
-  },
-
   validateCreateUserBody: (req, res, next) => {
     try {
       const { error } = userValidator.createValidator.validate(req.body);

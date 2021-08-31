@@ -1,6 +1,8 @@
 const { userService } = require('../services');
 const passwordService = require('../services/password.service');
 const { UPDATED, DELETED } = require('../config/message');
+const userNormalizator = require('../utils/userUtil');
+const { USER_CREATED, USER_DELETED } = require('../config/status');
 
 module.exports = {
   getAllUser: async (req, res, next) => {
@@ -20,7 +22,8 @@ module.exports = {
       const hashPassword = await passwordService.hashPassword(password);
 
       const user = await userService.createUser({ ...req.body, password: hashPassword });
-      res.json(`name: ${user.name} || email : ${user.email} `);
+      const userNormalize = userNormalizator.userNormalizator(user);
+      res.json(USER_CREATED, userNormalize);
     } catch (e) {
       next(e);
     }
@@ -28,30 +31,26 @@ module.exports = {
 
   getUserById: (req, res, next) => {
     try {
-      // const user = await userService.findUserById(req.params.user_id);
       res.json(req.user);
     } catch (e) {
       next(e);
     }
   },
-
   deleteUser: async (req, res, next) => {
     try {
       const { user_id } = req.params;
       await userService.deleteUser(user_id);
-      res.json(DELETED);
+      res.json(USER_DELETED, DELETED);
     } catch (e) {
       next(e);
     }
   },
-
   updateUser: async (req, res, next) => {
     try {
       const { user_id } = req.params;
 
       await userService.updateUser(user_id, req.body);
-
-      res.json(UPDATED);
+      res.json(USER_CREATED, UPDATED);
     } catch (e) {
       next(e);
     }
