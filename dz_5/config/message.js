@@ -5,4 +5,7 @@ module.exports = {
   UPDATED: 'Updated',
   DELETED: 'Deleted',
   WRONG_DATA: 'Email or password is wrong',
+  NOT_FOUND: 'Not found',
+  CREATED: 'Created',
+  WELCOME: 'Welcome'
 };

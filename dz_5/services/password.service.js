@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const ErrorHandler = require('../errors/ErrorHandler');
+const { NOT_VALID_DATA } = require('../config/status');
 const { WRONG_DATA } = require('../config/message');
 
 module.exports = {
@@ -8,9 +9,7 @@ module.exports = {
     const isPasswordMatched = await bcrypt.compare(password, hash);
 
     if (!isPasswordMatched) {
-      throw new ErrorHandler(400, WRONG_DATA);
+      throw new ErrorHandler(NOT_VALID_DATA, WRONG_DATA);
     }
-
-    return true;
   }
 };

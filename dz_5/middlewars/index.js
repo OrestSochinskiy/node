@@ -1,3 +1,4 @@
 module.exports = {
-  userMiddlewar: require('./userMiddlewar')
+  userMiddlewar: require('./userMiddlewar'),
+  authMiddlewar: require('./authMiddlewar')
 };

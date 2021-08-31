@@ -1,18 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { MONGO_CONNECTION } = require('./config/variables');
+const { NOT_FOUND } = require('./config/message');
+const status = require('./config/status');
 
 const { PORT } = require('./config/variables');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/apr-2021');
+mongoose.connect(MONGO_CONNECTION);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { userRouter } = require('./routes');
+const { userRouter, authRouter } = require('./routes');
 
 app.get('/ping', (req, res) => res.json('Pong'));
+app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('*', _notFoundError);
 app.use(_errorHandler);
@@ -24,15 +28,15 @@ app.listen(PORT, () => {
 
 function _notFoundError(err, req, res, next) {
   next({
-    status: err.status || 404,
-    message: err.message || 'Not found'
+    status: err.status || status.NOT_FOUND,
+    message: err.message || NOT_FOUND
   });
 }
 
 // eslint-disable-next-line no-unused-vars
 function _errorHandler(err, req, res, next) {
   res
-    .status(err.status || 500)
+    .status(err.status || status.SERVER_ERROR)
     .json({
       message: err.message
     });

@@ -10,6 +10,7 @@ const createValidator = Joi.object({
   email: Joi.string().regex(EMAIL_REGEXP).required().trim(),
   role: Joi.string().allow(...Object.values(userRolesEnum))
 });
+
 const updateValidator = Joi.object({
   name: Joi.string().alphanum().min(2).max(30)
     .trim(),
