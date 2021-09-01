@@ -3,5 +3,5 @@ module.exports = {
   SERVER_ERROR: 500,
   NOT_VALID_DATA: 400,
   USER_CREATED: 204,
-  USER_DELETED: 201
+  USER_DELETED: 201,
 };
