@@ -4,4 +4,5 @@ module.exports = {
   NOT_VALID_DATA: 400,
   USER_CREATED: 204,
   USER_DELETED: 201,
+  FORBIDDEN: 403,
 };

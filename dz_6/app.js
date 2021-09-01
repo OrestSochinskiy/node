@@ -25,7 +25,6 @@ app.use(_errorHandler);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(process.env);
   console.log('APP LISTEN', PORT);
 });
 

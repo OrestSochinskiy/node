@@ -7,5 +7,6 @@ module.exports = {
   WRONG_DATA: 'Email or password is wrong',
   NOT_FOUND: 'Not found',
   CREATED: 'Created',
-  WELCOME: 'Welcome'
+  WELCOME: 'Welcome',
+  FORBIDDEN: 'FORBIDDEN'
 };

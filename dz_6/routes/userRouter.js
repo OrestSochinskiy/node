@@ -1,16 +1,22 @@
 const router = require('express').Router();
 const { userController } = require('../controllers');
-const { userMiddlewar } = require('../middlewars');
+const {
+  userMiddlewar: {
+    isUserPresent, isEmailUsed, checkUserRoleMiddleware, validateCreateUserBody, validateUpdateUserBody, getUserByDynamicParam
+  }
+} = require('../middlewars');
 
 router.get('/', userController.getAllUser);
 
-router.post('/', userMiddlewar.validateCreateUserBody,
-  userMiddlewar.isEmailUsed, userController.createUser);
+router.post('/', validateCreateUserBody,
+  isEmailUsed, userController.createUser);
 
-router.get('/:user_id', userMiddlewar.isUserPresent, userController.getUserById);
+router.get('/:user_id',
+  getUserByDynamicParam('user_id', 'params', '_id'),
+  userController.getUserById);
 
-router.delete('/:user_id', userMiddlewar.isUserPresent, userController.deleteUser);
+router.delete('/:user_id', isUserPresent, checkUserRoleMiddleware(['admin']), userController.deleteUser);
 
-router.put('/:user_id', userMiddlewar.validateUpdateUserBody, userMiddlewar.isUserPresent, userController.updateUser);
+router.put('/:user_id', validateUpdateUserBody, isUserPresent, userController.updateUser);
 
 module.exports = router;

@@ -31,7 +31,11 @@ module.exports = {
 
   getUserById: (req, res, next) => {
     try {
-      res.json(req.user);
+      const { user } = req;
+
+      const userNormalize = userNormalizator.userNormalizator(user);
+
+      res.json(userNormalize);
     } catch (e) {
       next(e);
     }
