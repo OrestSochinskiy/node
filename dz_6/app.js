@@ -4,6 +4,8 @@ const { MONGO_CONNECTION } = require('./config/variables');
 const { NOT_FOUND } = require('./config/message');
 const status = require('./config/status');
 
+require('dotenv').config();
+
 const { PORT } = require('./config/variables');
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(_errorHandler);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
+  console.log(process.env);
   console.log('APP LISTEN', PORT);
 });
 
