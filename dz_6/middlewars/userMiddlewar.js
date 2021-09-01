@@ -1,4 +1,4 @@
-const userValidator = require('../validators/userValidators');
+const { userValidator } = require('../validators');
 const User = require('../dataBase/User');
 const message = require('../config/message');
 const ErrorHandler = require('../errors/ErrorHandler');

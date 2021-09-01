@@ -15,11 +15,12 @@ mongoose.connect(MONGO_CONNECTION);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { userRouter, authRouter } = require('./routes');
+const { userRouter, authRouter, carRouter } = require('./routes');
 
 app.get('/ping', (req, res) => res.json('Pong'));
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
+app.use('/cars', carRouter);
 app.use('*', _notFoundError);
 app.use(_errorHandler);
 

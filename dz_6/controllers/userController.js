@@ -2,7 +2,7 @@ const { userService } = require('../services');
 const passwordService = require('../services/password.service');
 const { UPDATED, DELETED } = require('../config/message');
 const userNormalizator = require('../utils/userUtil');
-const { USER_CREATED, USER_DELETED } = require('../config/status');
+const { CREATED, USER_DELETED } = require('../config/status');
 
 module.exports = {
   getAllUser: async (req, res, next) => {
@@ -23,7 +23,7 @@ module.exports = {
 
       const user = await userService.createUser({ ...req.body, password: hashPassword });
       const userNormalize = userNormalizator.userNormalizator(user);
-      res.json(USER_CREATED, userNormalize);
+      res.json(CREATED, userNormalize);
     } catch (e) {
       next(e);
     }
@@ -54,7 +54,7 @@ module.exports = {
       const { user_id } = req.params;
 
       await userService.updateUser(user_id, req.body);
-      res.json(USER_CREATED, UPDATED);
+      res.json(CREATED, UPDATED);
     } catch (e) {
       next(e);
     }
