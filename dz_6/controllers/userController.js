@@ -40,6 +40,7 @@ module.exports = {
       next(e);
     }
   },
+
   deleteUser: async (req, res, next) => {
     try {
       const { user_id } = req.params;
@@ -49,6 +50,7 @@ module.exports = {
       next(e);
     }
   },
+
   updateUser: async (req, res, next) => {
     try {
       const { user_id } = req.params;

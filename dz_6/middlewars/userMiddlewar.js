@@ -5,22 +5,6 @@ const ErrorHandler = require('../errors/ErrorHandler');
 const { NOT_VALID_DATA, NOT_FOUND, FORBIDDEN } = require('../config/status');
 
 module.exports = {
-  isUserPresent: async (req, res, next) => {
-    try {
-      const { user_id } = req.params;
-
-      const currentUser = await User.findById(user_id).select('-password');
-
-      if (!currentUser) {
-        throw new ErrorHandler(NOT_FOUND, message.USER_NOT_FOUND);
-      }
-
-      req.user = currentUser;
-      next();
-    } catch (e) {
-      next(e);
-    }
-  },
 
   isEmailUsed: async (req, res, next) => {
     try {
@@ -36,6 +20,7 @@ module.exports = {
       next(e);
     }
   },
+
   validateCreateUserBody: (req, res, next) => {
     try {
       const { error } = userValidator.createValidator.validate(req.body);
@@ -61,6 +46,7 @@ module.exports = {
       next(e);
     }
   },
+
   checkUserRoleMiddleware: (rolesArr = []) => (req, res, next) => {
     try {
       const { role } = req.user;
@@ -77,6 +63,7 @@ module.exports = {
       next(e);
     }
   },
+
   getUserByDynamicParam: (paramName, searchIn = 'body', dbFiled = paramName) => async (req, res, next) => {
     try {
       const value = req[searchIn][paramName];

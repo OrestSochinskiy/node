@@ -2,6 +2,6 @@ const router = require('express').Router();
 const { authMiddlewar } = require('../middlewars');
 const { authController } = require('../controllers');
 
-router.post('/', authMiddlewar.isUserPresent, authMiddlewar.valideBody, authController.authUser);
+router.post('/', authMiddlewar.valideBody, authMiddlewar.isUserPresent, authController.authUser);
 
 module.exports = router;

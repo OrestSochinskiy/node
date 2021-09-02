@@ -5,4 +5,6 @@ module.exports = {
   USER_DELETED: 201,
   FORBIDDEN: 403,
   SUCCESS: 200,
+  CREATED_UPDATED: 201,
+  DELETED: 204,
 };
