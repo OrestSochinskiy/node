@@ -9,5 +9,8 @@ module.exports = {
   NOT_FOUND_MESSAGE: 'Not found',
   CREATED: 'Created',
   WELCOME: 'Welcome',
-  FORBIDDEN: 'FORBIDDEN'
+  FORBIDDEN: 'FORBIDDEN',
+  AUTHORIZATION: 'Authorization',
+  NOT_TOKEN: 'no token',
+  INVALID_TOKEN: 'invalid token'
 };

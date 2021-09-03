@@ -23,7 +23,7 @@ module.exports = {
 
       const user = await userService.createUser({ ...req.body, password: hashPassword });
       const userNormalize = userNormalizator.userNormalizator(user);
-      res.json(CREATED, userNormalize);
+      res.json(userNormalize);
     } catch (e) {
       next(e);
     }

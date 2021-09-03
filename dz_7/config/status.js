@@ -7,4 +7,6 @@ module.exports = {
   SUCCESS: 200,
   CREATED_UPDATED: 201,
   DELETED: 204,
+  EXIST: 409,
+  NOT_TOKEN: 401,
 };

@@ -2,18 +2,30 @@ const { userValidator } = require('../validators');
 const User = require('../dataBase/User');
 const message = require('../config/message');
 const ErrorHandler = require('../errors/ErrorHandler');
-const { NOT_VALID_DATA, NOT_FOUND, FORBIDDEN } = require('../config/status');
+const {
+  NOT_VALID_DATA, NOT_FOUND, FORBIDDEN, EXIST
+} = require('../config/status');
 
 module.exports = {
-
-  isEmailUsed: async (req, res, next) => {
+  isUserPresent: (req, res, next) => {
     try {
-      const { email } = req.body;
+      const { user } = req;
 
-      const isEmailUsed = await User.findOne({ email });
+      if (user) {
+        throw new ErrorHandler(EXIST, message.ALREADY_EXIST``);
+      }
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
 
-      if (isEmailUsed) {
-        throw new ErrorHandler(NOT_VALID_DATA, message.ALREADY_EXIST);
+  isUserNotPresent: (req, res, next) => {
+    try {
+      const { user } = req;
+
+      if (!user) {
+        throw new ErrorHandler(NOT_FOUND, message.USER_NOT_FOUND);
       }
       next();
     } catch (e) {
@@ -69,10 +81,6 @@ module.exports = {
       const value = req[searchIn][paramName];
 
       const user = await User.findOne({ [dbFiled]: value });
-
-      if (!user) {
-        throw new ErrorHandler(NOT_FOUND, message.USER_NOT_FOUND);
-      }
 
       req.user = user;
 
