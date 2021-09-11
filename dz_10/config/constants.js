@@ -5,5 +5,13 @@ module.exports = {
   PARAMS: 'params',
   _ID: '_id',
   CAR_ID: 'car_id',
-  BODY: 'body'
+  BODY: 'body',
+
+  PHOTO_MAX_TYPE: 5 * 1024 * 1024,
+  MIMETYPES: {
+    PHOTO: [
+      'image/jpeg',
+      'image/png'
+    ]
+  }
 };

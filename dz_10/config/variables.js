@@ -11,4 +11,9 @@ module.exports = {
   NO_REPLY_EMAIL_PASSWORD: process.env.NO_REPLY_EMAIL_PASSWORD || '1212',
 
   FROTEND_URL: process.env.FROTEND_URL || 'https://nodejs.org/dist/latest-v8.x/docs/api/process.html',
+
+  AWS_S3_NAME: process.env.AWS_S3_NAME || '',
+  AWS_S3_NAME_REGION: process.env.AWS_S3_NAME_REGION || '',
+  AWS_S3_ACCESS_KEY: process.env.AWS_S3_ACCESS_KEY || '',
+  AWS_S3_SECRET_KEY: process.env.AWS_S3_SECRET_KEY || '',
 };

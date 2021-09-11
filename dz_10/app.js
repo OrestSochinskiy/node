@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const expressFileUpload = require('express-fileupload');
 require('dotenv').config();
 const { MONGO_CONNECTION } = require('./config/variables');
 const { NOT_FOUND } = require('./config/message');
@@ -13,6 +14,7 @@ mongoose.connect(MONGO_CONNECTION);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(expressFileUpload());
 
 const { userRouter, authRouter, carRouter } = require('./routes');
 

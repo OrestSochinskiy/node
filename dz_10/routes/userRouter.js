@@ -10,7 +10,10 @@ const {
   userMiddlewar: {
     validateCreateUserBody, validateUpdateUserBody, getUserByDynamicParam,
     isUserPresent,
-    isUserNotPresent
+    isUserNotPresent,
+  },
+  fileMiddlewar: {
+    ckeckAvatar
   }
 } = require('../middlewars');
 
@@ -18,6 +21,7 @@ router.get('/', getAllUser);
 
 router.post('/',
   validateCreateUserBody,
+  ckeckAvatar,
   getUserByDynamicParam('email'),
   isUserPresent,
   createUser);

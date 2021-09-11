@@ -24,9 +24,13 @@ const userSchema = new Schema({
     type: String,
     default: userRolesEnum.USER,
     enum: Object.values(userRolesEnum)
+  },
+  avatar: {
+    type: String
   }
 }, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 
+// eslint-disable-next-line func-names
 userSchema.virtual('fullName').get(function() {
   return `${this.name} Zelenskiy`;
 });

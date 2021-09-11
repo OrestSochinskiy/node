@@ -16,4 +16,5 @@ module.exports = {
   OK: 'ok',
   WRONG_TEMPLATE_NAME: 'wrong template name',
   WRONG_TOKEN_TYPE: 'wrong token type',
+  BIG_FILE: 'big file',
 };

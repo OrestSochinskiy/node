@@ -12,7 +12,7 @@ module.exports = {
       const { user } = req;
 
       if (user) {
-        throw new ErrorHandler(EXIST, message.ALREADY_EXIST``);
+        throw new ErrorHandler(EXIST, message.ALREADY_EXIST);
       }
       next();
     } catch (e) {
