@@ -9,8 +9,7 @@ const { s3Service } = require('../services');
 module.exports = {
   getAllUser: async (req, res, next) => {
     try {
-      const users = await userService.findAllUser(req.body).select('-password');
-
+      const users = await userService.findAllUser().select('-password');
       res.json(users);
     } catch (e) {
       next(e);
