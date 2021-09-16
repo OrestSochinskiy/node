@@ -17,4 +17,5 @@ module.exports = {
   WRONG_TEMPLATE_NAME: 'wrong template name',
   WRONG_TOKEN_TYPE: 'wrong token type',
   BIG_FILE: 'big file',
+  CORS_NOT_ALLOWED: 'cors not allowed',
 };

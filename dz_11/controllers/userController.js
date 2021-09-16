@@ -4,13 +4,17 @@ const userNormalizator = require('../utils/userUtil');
 const emailActionsEnum = require('../config/email-actions');
 const { CREATED, USER_DELETED } = require('../config/status');
 const User = require('../dataBase/User');
+const { SUCCESS } = require('../config/status');
 const { s3Service } = require('../services');
 
 module.exports = {
   getAllUser: async (req, res, next) => {
     try {
-      const users = await userService.findAllUser().select('-password');
-      res.json(users);
+      const users = await userService.findAllUser(req.body);
+
+      const usersNormalize = users.map((user) => userNormalizator(user));
+
+      res.status(SUCCESS).json(usersNormalize);
     } catch (e) {
       next(e);
     }
