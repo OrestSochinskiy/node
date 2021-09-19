@@ -4,7 +4,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const expressFileUpload = require('express-fileupload');
 const expressRateLimit = require('express-rate-limit');
+const swaggerUI = require('swagger-ui-express');
 require('dotenv').config();
+
 const { MONGO_CONNECTION } = require('./config/variables');
 const { NOT_FOUND } = require('./config/message');
 const status = require('./config/status');
@@ -14,6 +16,8 @@ const { FORBIDDEN } = require('./config/status');
 
 const { PORT, ALLOWED_ORIGINS } = require('./config/variables');
 const cronJobs = require('./cron');
+const { userRouter, authRouter, carRouter } = require('./routes');
+const swaggerJson = require('./docs/swagger.json');
 
 const app = express();
 
@@ -38,7 +42,7 @@ if (process.env.NODE_ENV === 'dev') {
   app.use(morgan('dev'));
 }
 
-const { userRouter, authRouter, carRouter } = require('./routes');
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJson));
 
 app.get('/ping', (req, res) => res.json('Pong'));
 app.use('/auth', authRouter);

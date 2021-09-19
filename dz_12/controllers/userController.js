@@ -10,11 +10,11 @@ const { s3Service } = require('../services');
 module.exports = {
   getAllUser: async (req, res, next) => {
     try {
-      const users = await userService.findAllUser(req.body);
+      const users = await userService.findAllUser(req.body).select('-password');
 
-      const usersNormalize = users.map((user) => userNormalizator(user));
-
-      res.status(SUCCESS).json(usersNormalize);
+      res.status(SUCCESS).json(users);
+      // const users = await userService.getAll(req.query);
+      // res.json(users);
     } catch (e) {
       next(e);
     }
